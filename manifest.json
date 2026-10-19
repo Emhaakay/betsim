@@ -1,0 +1,10 @@
+{
+  "name": "BetSim \u2014 Fictional Football Betting Simulator",
+  "short_name": "BetSim",
+  "description": "Create fictional football matches, generate random virtual bet slips, and settle results.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#10131c",
+  "icons": []
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BetSim">
+<title>BetSim — Fictional Football Betting Simulator</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{color-scheme:dark;--bg:#0b0e14;--panel:#141925;--panel2:#1b2230;--line:#293244;--muted:#9ca8bc;--text:#f5f7fb;--green:#70e0a0;--red:#ff7c88;--yellow:#ffd36e;--blue:#86a9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#182032 0,#0b0e14 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:750;background:var(--green);color:#08120d}button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}button.danger{background:#47232d;color:#ffc7cc}button.small{padding:7px 10px;font-size:12px;border-radius:9px}button:disabled{opacity:.4;cursor:not-allowed}
+header{position:sticky;top:0;z-index:5;background:#0b0e14eF;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:14px 16px env(safe-area-inset-top)}.brand{display:flex;align-items:center;gap:10px;max-width:1000px;margin:auto}.logo{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--green);color:#09120d;font-size:22px}.brand h1{font-size:18px;margin:0}.brand p{font-size:12px;color:var(--muted);margin:1px 0 0}.badge{font-size:10px;letter-spacing:.08em;color:var(--green);border:1px solid #31684a;border-radius:20px;padding:4px 7px;margin-left:auto;white-space:nowrap}
+main{max-width:1000px;margin:auto;padding:18px 14px 100px}.hero{padding:16px 2px 18px}.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--green);font-weight:800}.hero h2{font-size:27px;line-height:1.08;margin:8px 0}.hero p{color:var(--muted);margin:8px 0 0;max-width:580px}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 20px}.stat,.panel,.fixture,.slip{background:linear-gradient(150deg,#171d2a,#111621);border:1px solid var(--line);border-radius:17px}.stat{padding:14px}.stat .label{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:22px;margin-top:5px;letter-spacing:-.03em}.stat small{font-size:11px;color:var(--muted)}.tabs{display:flex;gap:7px;overflow:auto;padding:4px 0 14px;scrollbar-width:none}.tabs button{white-space:nowrap;background:var(--panel);border:1px solid var(--line);color:var(--muted);padding:10px 13px}.tabs button.active{background:var(--green);color:#08120d;border-color:var(--green)}.view{display:none}.view.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:8px 0 14px}.section-head h3{font-size:19px;margin:0}.muted{color:var(--muted)}.smalltext{font-size:12px;color:var(--muted)}.panel{padding:16px;margin-bottom:13px}.panel h4{font-size:15px;margin:0 0 12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted)}input,select{width:100%;min-width:0;background:#0b0f18;color:var(--text);border:1px solid #30394a;border-radius:10px;padding:11px 10px;outline:none}input:focus,select:focus{border-color:var(--green)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.fixture{padding:14px;margin-bottom:10px}.fixture-top{display:flex;align-items:center;gap:8px}.fixture-top .status{margin-left:auto;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--yellow)}.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:14px 0}.team{font-weight:800;overflow-wrap:anywhere}.team:last-child{text-align:right}.score{font-size:23px;font-weight:900;white-space:nowrap}.fixture-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding-top:10px}.pill{display:inline-flex;align-items:center;border-radius:30px;background:#242c3c;padding:4px 8px;font-size:11px;color:var(--muted)}.pill.won{background:#163d2a;color:var(--green)}.pill.lost{background:#48212b;color:var(--red)}.pill.pending{background:#44371d;color:var(--yellow)}.slip{padding:14px;margin-bottom:10px}.slip-head{display:flex;gap:10px;align-items:flex-start}.avatar{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:#29364a;color:#d8e5ff;font-weight:900;flex-shrink:0}.slip-title{flex:1;min-width:0}.slip-title strong{display:block}.slip-title small{color:var(--muted)}.slip-metrics{text-align:right}.slip-metrics strong{display:block;font-size:17px}.picks{margin:13px 0;display:grid;gap:7px}.pick{display:flex;justify-content:space-between;gap:10px;padding:9px 10px;background:#0d121c;border-radius:10px;font-size:12px}.pick span:first-child{min-width:0;overflow-wrap:anywhere}.pick b{white-space:nowrap}.slip-bottom{border-top:1px solid var(--line);padding-top:11px;display:flex;justify-content:space-between;gap:10px;align-items:center}.moneyline{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.moneyline b{color:var(--text)}.empty{padding:30px 15px;text-align:center;color:var(--muted);border:1px dashed #374154;border-radius:15px}.empty strong{display:block;color:var(--text);margin-bottom:5px}.notice{background:#1c2c26;border:1px solid #2c5741;color:#b7f5ce;padding:11px 13px;border-radius:12px;font-size:12px;margin-bottom:12px}.warning{background:#352a19;border:1px solid #66502b;color:#ffe3a4}.hidden{display:none!important}.filterrow{display:flex;gap:8px;margin-bottom:12px}.filterrow select{flex:1}.toast{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#f5f7fb;color:#10131c;padding:11px 16px;border-radius:12px;font-weight:700;box-shadow:0 8px 30px #0008;z-index:20;max-width:90%;text-align:center}.bottomnav{position:fixed;bottom:0;left:0;right:0;padding:9px 10px calc(9px + env(safe-area-inset-bottom));background:#0b0e14ed;backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:6}.bottomnav-inner{width:min(100%,700px);display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.bottomnav button{background:transparent;color:var(--muted);font-size:11px;padding:7px 2px;border-radius:10px}.bottomnav button span{display:block;font-size:18px;margin-bottom:3px}.bottomnav button.active{background:#202a38;color:var(--green)}.modalback{position:fixed;inset:0;background:#0009;z-index:30;display:grid;place-items:end center;padding:10px}.modal{width:min(100%,520px);max-height:85vh;overflow:auto;background:#141925;border:1px solid var(--line);border-radius:20px;padding:18px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.modalhead h3{margin:0}.modalback[hidden]{display:none}
+@media(min-width:700px){main{padding:24px 22px 50px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.hero h2{font-size:35px}.bottomnav{position:static;background:transparent;border:0;padding:0 14px 12px}.bottomnav-inner{max-width:1000px;border:1px solid var(--line);border-radius:15px;background:#111621;padding:5px}.toast{bottom:25px}.modalback{place-items:center}.fixtures-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fixtures-grid .fixture{margin:0}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">⚽</div><div><h1>BetSim <span style="color:var(--green)">Fictional League</span></h1><p>Your matches. Your bettors. Your results.</p></div><span class="badge">VIRTUAL ONLY</span></div></header>
+<main>
+<section class="hero"><div class="eyebrow">Football betting sandbox</div><h2>Run your own betting world.</h2><p>Create imaginary fixtures, generate 10 random bettors at a time, enter scores when you like, and watch every slip settle automatically.</p></section>
+<div class="stats">
+<div class="stat"><div class="label">Fictional fixtures</div><strong id="statMatches">0</strong><small>Created by you</small></div>
+<div class="stat"><div class="label">Bettors</div><strong id="statBettors">0</strong><small>Generated profiles</small></div>
+<div class="stat"><div class="label">Settled slips</div><strong id="statSettled">0</strong><small id="statRecord">0 won · 0 lost</small></div>
+<div class="stat"><div class="label">Total virtual balance</div><strong id="statBalance">₦100,000</strong><small>Across generated bettors</small></div>
+</div>
+<div class="tabs" id="tabs">
+<button class="active" data-view="matches">⚽ Matches</button><button data-view="bettors">🎟️ Bet slips</button><button data-view="leaderboard">🏆 Leaderboard</button><button data-view="history">🧾 History</button>
+</div>
+<section id="view-matches" class="view active">
+<div class="section-head"><div><h3>Your fixtures</h3><div class="smalltext">Add made-up games and enter scores later.</div></div><button id="openAdd">＋ Add match</button></div>
+<div class="panel"><h4>Quick create a fixture</h4><form id="matchForm"><div class="formgrid">
+<div class="field"><label for="homeTeam">Home team</label><input id="homeTeam" placeholder="e.g. Lagos Lions" maxlength="35" required></div>
+<div class="field"><label for="awayTeam">Away team</label><input id="awayTeam" placeholder="e.g. Abuja Stars" maxlength="35" required></div>
+<div class="field full"><label for="matchNote">Matchday / note (optional)</label><input id="matchNote" placeholder="e.g. League Week 1" maxlength="50"></div>
+</div><div class="actions"><button type="submit">Create match</button><button type="button" class="secondary" id="demoBtn">Load demo league</button></div></form></div>
+<div class="notice">Tip: generate slips after you have created a few fixtures. Unscored games stay pending until you enter their final scores.</div>
+<div id="fixturesList"></div>
+</section>
+<section id="view-bettors" class="view">
+<div class="section-head"><div><h3>Generated bet slips</h3><div class="smalltext">10 fictional people per batch.</div></div></div>
+<div class="panel"><h4>Generate a batch</h4><div class="formgrid">
+<div class="field"><label for="batchStyle">Slip style</label><select id="batchStyle"><option value="mixed">Mixed slips</option><option value="single">Singles only</option><option value="accumulator">Accumulators only</option></select></div>
+<div class="field"><label for="stakeSize">Stake per slip</label><select id="stakeSize"><option value="500">₦500</option><option value="1000" selected>₦1,000</option><option value="2500">₦2,500</option><option value="5000">₦5,000</option><option value="random">Random ₦500–₦5,000</option></select></div>
+</div><div class="actions"><button id="generateBtn">🎲 Generate 10 bettors</button><button id="clearBetsBtn" class="secondary">Clear all slips</button></div><p class="smalltext">Each bettor starts with ₦10,000 virtual balance. These are simulations only; no real money or real fixtures.</p></div>
+<div class="filterrow"><select id="betFilter"><option value="all">All slips</option><option value="pending">Pending</option><option value="won">Won</option><option value="lost">Lost</option></select><select id="betSort"><option value="newest">Newest first</option><option value="highest">Highest return</option><option value="name">Bettor name</option></select></div>
+<div id="betsList"></div>
+</section>
+<section id="view-leaderboard" class="view">
+<div class="section-head"><div><h3>Bettor leaderboard</h3><div class="smalltext">Ranked by net profit from settled slips.</div></div><button class="secondary small" id="exportBtn">Export CSV</button></div>
+<div id="leaderboardList"></div>
+</section>
+<section id="view-history" class="view">
+<div class="section-head"><div><h3>Settlement history</h3><div class="smalltext">A record of completed slips and score changes.</div></div><button class="secondary small" id="exportHistoryBtn">Export CSV</button></div>
+<div id="historyList"></div>
+<div class="panel"><h4>Data & reset</h4><p class="smalltext">Your data is saved in this browser on this device. Export a CSV backup if you want a copy.</p><div class="actions"><button id="exportDataBtn" class="secondary">Export full backup</button><button id="resetBtn" class="danger">Reset everything</button></div></div>
+</section>
+</main>
+<nav class="bottomnav"><div class="bottomnav-inner"><button class="active" data-view="matches"><span>⚽</span>Matches</button><button data-view="bettors"><span>🎟️</span>Bet slips</button><button data-view="leaderboard"><span>🏆</span>Leaderboard</button><button data-view="history"><span>🧾</span>History</button></div></nav>
+<div id="toast" class="toast hidden" role="status"></div>
+<div id="scoreModal" class="modalback" hidden><div class="modal"><div class="modalhead"><h3 id="scoreTitle">Enter final score</h3><button class="secondary small" id="closeScore">✕</button></div><form id="scoreForm"><input type="hidden" id="scoreMatchId"><div class="formgrid"><div class="field"><label id="scoreHomeLabel">Home goals</label><input id="homeScore" type="number" min="0" max="99" step="1" required inputmode="numeric" placeholder="0"></div><div class="field"><label id="scoreAwayLabel">Away goals</label><input id="awayScore" type="number" min="0" max="99" step="1" required inputmode="numeric" placeholder="0"></div></div><div class="actions"><button type="submit">Save score & settle slips</button><button type="button" class="secondary" id="clearScore">Clear score</button></div></form></div></div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const STORE='betsim_fictional_v1';
+const names=['Mike Carter','David Okafor','Sarah Williams','Daniel Mensah','Chloe Martin','Tunde Balogun','Amara Johnson','Samuel Adeyemi','Grace Mitchell','Nathan Brooks','Adaeze Nwosu','Oliver James','Zara Bello','Michael Evans','Fatima Ibrahim','Joshua King','Liam Parker','Maya Thompson','Emeka Obi','Sofia Clark','Noah Bennett','Chioma Eze','Ethan Cole','Aisha Mohammed','Jayden Scott','Kemi Afolayan','Benjamin Reed','Isabella Ward','Chinedu Umeh','Ella Foster','Alex Morgan','Ruth Daniels','Peter Young','Nneka Okoro','Leo Hughes','Mariam Yusuf','Caleb Price','Olivia Green','Ifeanyi Obi','Hannah Lewis'];
+const teamPool=['Lagos Lions','Abuja Stars','Kano Warriors','Port Harcourt FC','Budapest United','Danube Rovers','Redbridge Athletic','North City','Coastal Eagles','Mountain Town','Royal Borough','Metro FC'];
+const state={matches:[],bets:[],history:[],view:'matches'};
+function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'{}');state.matches=Array.isArray(s.matches)?s.matches:[];state.bets=Array.isArray(s.bets)?s.bets:[];state.history=Array.isArray(s.history)?s.history:[]}catch(e){}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({matches:state.matches,bets:state.bets,history:state.history}));}catch(e){toast('Could not save in this browser. Export your data regularly.');}}
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function fmt(n){return '₦'+Math.round(n).toLocaleString('en-NG')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>$('toast').classList.add('hidden'),2600)}
+function matchById(mid){return state.matches.find(m=>m.id===mid)}
+function outcome(m){if(m.homeScore===m.awayScore)return 'draw';return m.homeScore>m.awayScore?'home':'away'}
+function evaluate(pick,m){
+ if(m.homeScore===null||m.awayScore===null)return 'pending';
+ const total=m.homeScore+m.awayScore, out=outcome(m);
+ if(pick.market==='result')return pick.selection===out?'won':'lost';
+ if(pick.market==='btts')return (pick.selection==='yes'?(m.homeScore>0&&m.awayScore>0):(m.homeScore===0||m.awayScore===0))?'won':'lost';
+ if(pick.market==='overunder')return (pick.selection==='over' ? total>pick.line : total<pick.line)?'won':'lost';
+ if(pick.market==='correct')return (m.homeScore===pick.home&&m.awayScore===pick.away)?'won':'lost';
+ return 'pending';
+}
+function settleAll(){
+ let changes=0;
+ for(const b of state.bets){
+   if(b.status!=='pending')continue;
+   const picks=b.picks.map(p=>({...p,status:evaluate(p,matchById(p.matchId)||{})}));
+   if(picks.some(p=>p.status==='pending'))continue;
+   const won=picks.every(p=>p.status==='won');
+   b.picks=picks;b.status=won?'won':'lost';b.settledAt=new Date().toISOString();
+   b.returnAmount=won?Math.round(b.stake*b.odds*100)/100:0;
+   b.profit=b.returnAmount-b.stake;bettorBalanceUpdate(b);changes++;
+   state.history.unshift({id:id(),type:'settlement',betId:b.id,name:b.name,status:b.status,profit:b.profit,returnAmount:b.returnAmount,at:b.settledAt,summary:picks.length+' pick(s) settled'});
+ }
+ if(changes)save();
+ return changes;
+}
+function bettorBalanceUpdate(b){b.balance=(b.balance===undefined?10000-b.stake:b.balance)+b.returnAmount;}
+function addMatch(home,away,note=''){if(!home.trim()||!away.trim())return;state.matches.unshift({id:id(),home:home.trim(),away:away.trim(),note:note.trim(),homeScore:null,awayScore:null,createdAt:new Date().toISOString()});state.history.unshift({id:id(),type:'fixture',summary:'Fixture created: '+home.trim()+' vs '+away.trim(),at:new Date().toISOString()});save();render();toast('Fixture created.');}
+$('matchForm').addEventListener('submit',e=>{e.preventDefault();addMatch($('homeTeam').value,$('awayTeam').value,$('matchNote').value);$('matchForm').reset()});
+$('demoBtn').addEventListener('click',()=>{if(state.matches.length&&!confirm('Add demo fixtures to your existing list?'))return;[['Lagos Lions','Abuja Stars','League Week 1'],['Kano Warriors','Coastal Eagles','League Week 1'],['Budapest United','Danube Rovers','Friendly'],['Metro FC','Mountain Town','League Week 2'],['Royal Borough','Port Harcourt FC','League Week 2']].forEach(x=>addMatchQuiet(...x));save();render();toast('Demo fixtures added.')});
+function addMatchQuiet(home,away,note){state.matches.push({id:id(),home,away,note,homeScore:null,awayScore:null,createdAt:new Date().toISOString()})}
+function openScore(mid){const m=matchById(mid);if(!m)return;$('scoreMatchId').value=mid;$('scoreTitle').textContent=m.home+' vs '+m.away;$('scoreHomeLabel').textContent=m.home+' goals';$('scoreAwayLabel').textContent=m.away+' goals';$('homeScore').value=m.homeScore===null?'':m.homeScore;$('awayScore').value=m.awayScore===null?'':m.awayScore;$('scoreModal').hidden=false}
+function closeScore(){$('scoreModal').hidden=true}
+$('closeScore').onclick=closeScore;$('scoreModal').addEventListener('click',e=>{if(e.target===$('scoreModal'))closeScore()});
+$('scoreForm').addEventListener('submit',e=>{e.preventDefault();const m=matchById($('scoreMatchId').value);if(!m)return;m.homeScore=Number($('homeScore').value);m.awayScore=Number($('awayScore').value);m.scoredAt=new Date().toISOString();const changed=settleAll();state.history.unshift({id:id(),type:'score',summary:'Final score entered: '+m.home+' '+m.homeScore+'–'+m.awayScore+' '+m.away,at:new Date().toISOString()});save();closeScore();render();toast('Score saved. '+changed+' slip(s) settled.')});
+$('clearScore').onclick=()=>{const m=matchById($('scoreMatchId').value);if(!m)return;if(state.bets.some(b=>b.status!=='pending'&&b.picks.some(p=>p.matchId===m.id))){toast('This match has already settled slips. Scores cannot be cleared after settlement.');return}m.homeScore=null;m.awayScore=null;save();closeScore();render();toast('Score cleared.')};
+function random(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function randomInt(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function oddsFor(p){if(p.market==='result')return p.selection==='draw'?3.1:randomInt(17,24)/10;if(p.market==='btts')return randomInt(17,21)/10;if(p.market==='overunder')return randomInt(16,22)/10;return randomInt(5,12)}
+function marketLabel(p){if(p.market==='result')return p.selection==='home'?p.home+' to win':p.selection==='away'?p.away+' to win':'Draw';if(p.market==='btts')return 'Both teams to score: '+(p.selection==='yes'?'Yes':'No');if(p.market==='overunder')return (p.selection==='over'?'Over ':'Under ')+p.line+'.5 total goals';if(p.market==='correct')return 'Correct score: '+p.home+' '+p.homeScorePick+'–'+p.awayScorePick+' '+p.away;return p.selection}
+function makePick(m){
+ const market=random(['result','result','btts','overunder','correct']);let p={id:id(),matchId:m.id,market,home:m.home,away:m.away};
+ if(market==='result')p.selection=random(['home','draw','away']);
+ else if(market==='btts')p.selection=random(['yes','no']);
+ else if(market==='overunder'){p.selection=random(['over','under']);p.line=random([1,2,3,4])}
+ else {p.homeScorePick=randomInt(0,4);p.awayScorePick=randomInt(0,4);p.homeScore=p.homeScorePick;p.awayScore=p.awayScorePick;p.selection='correct';}
+ p.odds=oddsFor(p);p.status=evaluate(p,m);return p;
+}
+function generateBatch(){
+ if(state.matches.length<1){toast('Create at least one fixture first.');return}
+ const style=$('batchStyle').value, stakeSetting=$('stakeSize').value;
+ const usable=state.matches;
+ for(let i=0;i<10;i++){
+   let selected=usable.slice(); // each batch samples only fixtures that exist at generation time
+   const count=style==='single'?1:style==='accumulator'?randomInt(Math.min(2,selected.length),Math.min(5,selected.length)):randomInt(1,Math.min(4,selected.length));
+   const chosen=[];while(chosen.length<count&&selected.length){const idx=randomInt(0,selected.length-1);chosen.push(selected.splice(idx,1)[0])}
+   const picks=chosen.map(makePick);
+   let odds=picks.reduce((v,p)=>v*p.odds,1);odds=Math.round(odds*100)/100;
+   const stake=stakeSetting==='random'?randomInt(1,10)*500:Number(stakeSetting);
+   const name=random(names);
+   const already=new Set(state.bets.map(b=>b.name));let bettor=name,attempt=0;while(already.has(bettor)&&attempt<30){bettor=random(names)+' '+randomInt(2,99);attempt++}
+   const b={id:id(),name:bettor,picks,stake,odds,status:'pending',returnAmount:0,profit:0,balance:10000-stake,createdAt:new Date().toISOString(),settledAt:null};
+   // If every selected fixture already has a score, settle immediately.
+   if(picks.every(p=>p.status!=='pending')){b.status=picks.every(p=>p.status==='won')?'won':'lost';b.returnAmount=b.status==='won'?Math.round(stake*odds*100)/100:0;b.profit=b.returnAmount-stake;b.balance+=b.returnAmount;b.settledAt=new Date().toISOString();state.history.unshift({id:id(),type:'settlement',betId:b.id,name:b.name,status:b.status,profit:b.profit,returnAmount:b.returnAmount,at:b.settledAt,summary:'New slip settled immediately'})}
+   state.bets.unshift(b);
+   state.history.unshift({id:id(),type:'bet',betId:b.id,name:b.name,summary:'Generated '+(picks.length>1?'accumulator':'single')+' slip for '+bettor,at:b.createdAt});
+ }
+ save();render();toast('10 fictional bettors generated.');
+}
+$('generateBtn').onclick=generateBatch;
+$('clearBetsBtn').onclick=()=>{if(!state.bets.length){toast('There are no slips to clear.');return}if(confirm('Delete every bet slip and its settlement history? Fixtures will remain.')){state.bets=[];state.history=state.history.filter(h=>h.type!=='bet'&&h.type!=='settlement');save();render();toast('All slips cleared.')}};
+$('betFilter').onchange=renderBets;$('betSort').onchange=renderBets;
+function renderMatches(){
+ const host=$('fixturesList');if(!state.matches.length){host.innerHTML='<div class="empty"><strong>No fixtures yet</strong>Add your own match or load the demo league to get started.</div>';return}
+ host.innerHTML='<div class="fixtures-grid">'+state.matches.map(m=>{const scored=m.homeScore!==null&&m.awayScore!==null;return `<article class="fixture"><div class="fixture-top"><span class="pill">${esc(m.note||'Fictional fixture')}</span><span class="status">${scored?'Full time':'Not played'}</span></div><div class="teams"><div class="team">${esc(m.home)}</div><div class="score">${scored?m.homeScore+' – '+m.awayScore:'vs'}</div><div class="team">${esc(m.away)}</div></div><div class="fixture-foot"><span class="smalltext">${state.bets.filter(b=>b.picks.some(p=>p.matchId===m.id)).length} slip selection(s)</span><div class="actions" style="margin:0"><button class="small" data-score="${m.id}">${scored?'Edit score':'Enter score'}</button><button class="small secondary" data-delete-match="${m.id}">Delete</button></div></div></article>`}).join('')+'</div>';
+ host.querySelectorAll('[data-score]').forEach(b=>b.onclick=()=>openScore(b.dataset.score));
+ host.querySelectorAll('[data-delete-match]').forEach(b=>b.onclick=()=>deleteMatch(b.dataset.deleteMatch));
+}
+function deleteMatch(mid){if(state.bets.some(b=>b.picks.some(p=>p.matchId===mid))){toast('Cannot delete a fixture used by a bet slip. Keep it for history.');return}if(confirm('Delete this fixture?')){state.matches=state.matches.filter(m=>m.id!==mid);save();render();toast('Fixture deleted.')}}
+function renderBets(){
+ const host=$('betsList');let list=[...state.bets];const filter=$('betFilter').value,sort=$('betSort').value;
+ if(filter!=='all')list=list.filter(b=>b.status===filter);
+ if(sort==='highest')list.sort((a,b)=>b.returnAmount-a.returnAmount);else if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));else list.sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+ if(!list.length){host.innerHTML='<div class="empty"><strong>No slips here yet</strong>Create fixtures, then generate a batch of 10 fictional bettors.</div>';return}
+ host.innerHTML=list.map(b=>`<article class="slip"><div class="slip-head"><div class="avatar">${esc(b.name.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase())}</div><div class="slip-title"><strong>${esc(b.name)}</strong><small>${b.picks.length>1?'Accumulator · '+b.picks.length+' selections':'Single · 1 selection'} · ${new Date(b.createdAt).toLocaleDateString()}</small></div><div class="slip-metrics"><span class="pill ${b.status}">${b.status.toUpperCase()}</span><strong>${b.odds.toFixed(2)}x</strong></div></div><div class="picks">${b.picks.map(p=>`<div class="pick"><span><b>${esc(p.home)} vs ${esc(p.away)}</b><br>${esc(marketLabel(p))}</span><span style="text-align:right"><b>${p.odds.toFixed(2)}</b><br><span class="pill ${p.status}">${p.status}</span></span></div>`).join('')}</div><div class="slip-bottom"><div class="moneyline"><span>Stake <b>${fmt(b.stake)}</b></span><span>Return <b>${fmt(b.returnAmount)}</b></span><span>Net <b style="color:${b.profit>0?'var(--green)':b.profit<0?'var(--red)':'var(--text)'}">${b.status==='pending'?'—':(b.profit>0?'+':'')+fmt(b.profit)}</b></span></div><button class="small secondary" data-detail="${b.id}">Details</button></div></article>`).join('');
+ host.querySelectorAll('[data-detail]').forEach(btn=>btn.onclick=()=>showBetDetail(btn.dataset.detail));
+}
+function showBetDetail(bid){const b=state.bets.find(x=>x.id===bid);if(!b)return;alert(b.name+'\\nSlip: '+b.id+'\\nStatus: '+b.status.toUpperCase()+'\\nStake: '+fmt(b.stake)+'\\nCombined odds: '+b.odds.toFixed(2)+'\\nReturn: '+fmt(b.returnAmount)+'\\nNet: '+(b.status==='pending'?'Pending':fmt(b.profit))+'\\nVirtual balance: '+fmt(b.balance)+'\\n\\nSelections:\\n'+b.picks.map(p=>p.home+' vs '+p.away+' — '+marketLabel(p)+' ['+p.status+']').join('\\n'))}
+function peopleStats(){const map=new Map();for(const b of state.bets){if(!map.has(b.name))map.set(b.name,{name:b.name,slips:0,won:0,lost:0,pending:0,staked:0,returns:0,profit:0,balance:10000});const p=map.get(b.name);p.slips++;p.staked+=b.stake;p.returns+=b.returnAmount;p.profit+=b.status==='pending'?0:b.profit;if(b.status==='won')p.won++;else if(b.status==='lost')p.lost++;else p.pending++;p.balance-=b.stake;if(b.status!=='pending')p.balance+=b.returnAmount;}
+ return [...map.values()].sort((a,b)=>b.profit-a.profit)}
+function renderLeaderboard(){const host=$('leaderboardList'),people=peopleStats();if(!people.length){host.innerHTML='<div class="empty"><strong>No bettors yet</strong>Generate your first batch to start the leaderboard.</div>';return}
+ host.innerHTML=people.map((p,i)=>`<article class="fixture" style="display:flex;align-items:center;gap:12px"><div class="avatar">${i+1}</div><div style="flex:1;min-width:0"><strong>${esc(p.name)}</strong><div class="smalltext">${p.slips} slips · ${p.won} won · ${p.lost} lost · ${p.pending} pending</div></div><div style="text-align:right"><strong style="color:${p.profit>0?'var(--green)':p.profit<0?'var(--red)':'var(--text)'}">${p.profit>0?'+':''}${fmt(p.profit)}</strong><div class="smalltext">Net settled profit</div></div></article>`).join('')}
+function renderHistory(){const host=$('historyList');if(!state.history.length){host.innerHTML='<div class="empty"><strong>No history yet</strong>Created fixtures, generated slips and settlements will appear here.</div>';return}
+ host.innerHTML=state.history.slice(0,100).map(h=>`<article class="fixture" style="display:flex;gap:10px;align-items:flex-start"><div class="avatar">${h.type==='settlement'?'✓':h.type==='score'?'⚽':h.type==='bet'?'🎟':'＋'}</div><div style="flex:1"><strong>${esc(h.summary||'Activity')}</strong><div class="smalltext">${new Date(h.at).toLocaleString()}</div>${h.name?'<div class="smalltext">'+esc(h.name)+' · '+esc(h.status||'')+'</div>':''}</div>${h.type==='settlement'?'<strong style="color:'+(h.profit>0?'var(--green)':h.profit<0?'var(--red)':'var(--text)')+'">'+(h.profit>0?'+':'')+fmt(h.profit)+'</strong>':''}</article>`).join('')}
+function renderStats(){const settled=state.bets.filter(b=>b.status!=='pending'),won=settled.filter(b=>b.status==='won').length,lost=settled.length-won;const balance=state.bets.reduce((sum,b)=>sum+(b.balance===undefined?10000:b.balance),0);$('statMatches').textContent=state.matches.length;$('statBettors').textContent=state.bets.length;$('statSettled').textContent=settled.length;$('statRecord').textContent=won+' won · '+lost+' lost';$('statBalance').textContent=fmt(balance)}
+function render(){renderStats();renderMatches();renderBets();renderLeaderboard();renderHistory()}
+function switchView(v){state.view=v;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id==='view-'+v));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+$('openAdd').onclick=()=>{switchView('matches');$('homeTeam').focus();window.scrollTo({top:document.querySelector('#matchForm').getBoundingClientRect().top+window.scrollY-100,behavior:'smooth'})};
+function download(filename,content,type='text/csv'){const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function csv(rows){return rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n')}
+$('exportBtn').onclick=()=>download('betsim-leaderboard.csv',csv([['Name','Slips','Won','Lost','Pending','Stake','Return','Net profit'],...peopleStats().map(p=>[p.name,p.slips,p.won,p.lost,p.pending,p.staked,p.returns,p.profit])]));
+$('exportHistoryBtn').onclick=()=>download('betsim-history.csv',csv([['Date','Type','Description','Bettor','Status','Net profit'],...state.history.map(h=>[h.at,h.type,h.summary,h.name,h.status,h.profit])]));
+$('exportDataBtn').onclick=()=>download('betsim-backup.json',JSON.stringify({matches:state.matches,bets:state.bets,history:state.history},null,2),'application/json');
+$('resetBtn').onclick=()=>{if(confirm('Permanently clear all fictional matches, bettors, slips and history from this browser? Export a backup first if needed.')){state.matches=[];state.bets=[];state.history=[];save();render();toast('Simulator reset.')}};
+load();render();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
